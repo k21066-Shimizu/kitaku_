@@ -1,6 +1,6 @@
 import React from "react";
 import CalcBusTrainTime from "./CalcBusTrainTime";
-import './Snap.css'
+import './Snap.scss'
 
 function DepictTimes(props: Parameters<typeof CalcBusTrainTime>[0]) {
     const { busTime, trainTime, status } = CalcBusTrainTime(props);

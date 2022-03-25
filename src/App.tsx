@@ -1,5 +1,5 @@
 import React from 'react'
-import './test.css'
+import './test.scss'
 import DepictTimes from './DepictTimes'
 import { useState, useEffect } from 'react'
 import getWether from './weather'
