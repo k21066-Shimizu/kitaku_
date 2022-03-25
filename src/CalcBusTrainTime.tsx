@@ -2,7 +2,6 @@ type Props = {
     start: string,
     date: Date,
     isHoliday: boolean,
-    selectedTab: string,
     route: string
 };
 
@@ -20,7 +19,7 @@ function CalcBusTrainTime(props: Props) {
     ];
     const busDuring = [0, 10] as Time;
 
-    const { start: start_string, date, isHoliday, selectedTab, route } = props;
+    const { start: start_string, date, isHoliday, route } = props;
     const start = start_string.split(":").map(Number) as Time;
     const busDiaMode = busCalendar[date.getMonth() + 1][date.getDate() - 1];
     if (busDiaMode === 3) return { status: 0 }
@@ -36,7 +35,7 @@ function CalcBusTrainTime(props: Props) {
         mostfastBusTime !== undefined ? timeCalc(mostfastBusTime, busDuring) : start
     );
 
-    if (selectedTab === '0' || mostfastBusTime === undefined || mostfastTrainTime === undefined) return {
+    if (mostfastBusTime === undefined || mostfastTrainTime === undefined) return {
         busTime: mostfastBusTime,
         trainTime: mostfastTrainTime
     }

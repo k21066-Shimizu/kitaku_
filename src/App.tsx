@@ -1,34 +1,27 @@
-import React from 'react';
+import React from 'react'
 import './test.css'
-import './Snap.css'
-import Datatable from './Datatable';
-import DepictTimes from './DepictTimes';
+import DepictTimes from './DepictTimes'
 import { useState, useEffect } from 'react'
-import getWether from './weather';
-import JapaneseHoliday from 'japanese-holidays';
+import getWether from './weather'
+import JapaneseHoliday from 'japanese-holidays'
 
 function App() {
     const getDayName = (date: Date, isHoliday: string | undefined) => isHoliday ? '祝' : ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
     const timeFormat = (time: Date) => `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
     const hcGene = (func: Function) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => func(e.target.value);
-    const changeTab = (element: React.MouseEvent<HTMLSpanElement, MouseEvent>) => selectedTabSet(element.currentTarget.dataset.index ?? '0');
     const setTimeNow = () => timeSearchSet(timeFormat(new Date()));
 
     const now = new Date();
     const timestamp = timeFormat(now);
     const isHoliday = JapaneseHoliday.isHoliday(now);
     const dateText = `${now.getMonth() + 1}月${now.getDate()}日（${getDayName(now, isHoliday)}）`;
-    const tabs = ['余裕バス', '快適バス'];
     const localRoute = localStorage.getItem('route') ?? '0';
-    const localTab = localStorage.getItem('selectedTab') ?? '0';
 
     const [routeGet, routeSet] = useState(localRoute);
     const [timeSearchGet, timeSearchSet] = useState(timestamp);
     const [weatherGet, weatherSet] = useState(<></>);
-    const [selectedTabGet, selectedTabSet] = useState(localTab);
 
     localStorage.setItem('route', routeGet);
-    localStorage.setItem('selectedTab', selectedTabGet);
     useEffect(() => {
         getWether().then(ret => weatherSet(ret));
     }, []);
@@ -65,7 +58,6 @@ function App() {
                         start={timeSearchGet}
                         date={now}
                         isHoliday={!!isHoliday}
-                        selectedTab={selectedTabGet}
                     />
                 }
             </div>
