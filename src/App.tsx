@@ -6,14 +6,14 @@ import getWether from './weather'
 import JapaneseHoliday from 'japanese-holidays'
 
 function App() {
-    const getDayName = (date: Date, isHoliday: string | undefined) => isHoliday ? '祝' : ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
+    const getDayName = (date: Date, isHoliday: boolean) => isHoliday ? '祝' : ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
     const timeFormat = (time: Date) => `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
     const hcGene = (func: Function) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => func(e.target.value);
     const setTimeNow = () => timeSearchSet(timeFormat(new Date()));
 
     const now = new Date();
     const timestamp = timeFormat(now);
-    const isHoliday = JapaneseHoliday.isHoliday(now);
+    const isHoliday = !!JapaneseHoliday.isHoliday(now);
     const dateText = `${now.getMonth() + 1}月${now.getDate()}日（${getDayName(now, isHoliday)}）`;
     const localRoute = localStorage.getItem('route') ?? '0';
 
@@ -57,7 +57,7 @@ function App() {
                         route={routeGet}
                         start={timeSearchGet}
                         date={now}
-                        isHoliday={!!isHoliday}
+                        isHoliday={isHoliday}
                     />
                 }
             </div>

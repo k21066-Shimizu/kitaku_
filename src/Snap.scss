@@ -1,31 +1,20 @@
-#timetable_list {
-    width: 100%;
-    overflow-x: scroll;
-}
-
 #time-list {
-    display: flex;
-    overflow-x: auto;
-    column-gap: 50px;
-    scroll-snap-type: x mandatory;
-}
+    .time-set {
+        display: flex;
+        flex-direction: row;
+        padding: 1em 0;
 
-.time-item {
-    scroll-snap-align: center;
-}
+        &:nth-child(2n) {
+            background-color: #8ac8ff;
+        }
+    }
 
-.time-item * {
-    text-align: center;
-}
-
-.traintime-head {
-    text-align: left;
-}
-
-.traintime-data {
-    font-size: 100px;
-}
-
-.traintime-tail {
-    text-align: right;
+    .bus-wrapper, .train-wrapper {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 0.2em;
+    }
 }
